@@ -4,6 +4,14 @@ import styled from 'styled-components'
 import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';
 import MainContent from './components/MainContent';
+import { BrowserRouter as Router , Routes , Route }  from 'react-router-dom';
+import Profile from './components/Profile';
+import AddTests from './components/AddTests';
+import LabTests from './components/LabTests';
+import MyBookings from './components/MyBookings';
+import AddNurses from './components/AddNurses';
+import Nurses from './components/Nurses';
+import SignUp from './components/SignUp';
 
 const Myh1 = styled.h1`
   color: red;
@@ -11,13 +19,25 @@ const Myh1 = styled.h1`
 
 function App() {
   return (
-    <div className="App">
+    <Router>
+         <div className="App">
     
-      <SideBar/>
-      <TopBar/>
-      {/* Routing will be required here */}
-      <MainContent/>
-    </div>
+          <SideBar/>
+          <TopBar/>
+          {/* Routing will be required here */}
+           <Routes>
+            <Route path='/' element = {<MainContent/>}></Route>
+            <Route path='/profile' element = {<SignUp/>}></Route>
+            <Route path='/add_tests' element = {<AddTests/>}></Route>
+            <Route path='/lab_tests' element = {<LabTests/>}></Route>
+            <Route path='/my_bookings' element = {<MyBookings/>}></Route>
+            <Route path='/add_nurses' element = {<AddNurses/>}></Route>
+            <Route path='/nurses' element = {<Nurses/>}></Route>
+           </Routes>
+
+        </div>
+    </Router>
+   
   );
 }
 

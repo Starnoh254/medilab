@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled  from 'styled-components';
 import {AiFillAppstore,  AiFillAccountBook, AiFillAlert, AiOutlineAppstore, AiOutlineLogout, AiOutlineWhatsApp } from 'react-icons/ai'
 import {AiOutlineBank,AiOutlinePlusCircle,AiOutlineUser,AiTwotoneCopy} from 'react-icons/ai'
+import {Link} from "react-router-dom"
+// sudo npm install react-router-dom@latest  - Installation
 
 
 // Hooks 
@@ -45,38 +47,52 @@ const Section = styled.section`
             list-style-type: none;
             padding: 1rem;
             text-align: left;
-            li {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-            
-                padding: 1rem;
-                border-radius: 0.5rem;
-                
-                
-            &:hover{
-                padding: 1rem;
-                background-color: black;
-                a{
-                    color: white;
-                    text-decoration: none;
-                }
-            }
-            a{
-                color: beige;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                svg{
+                li {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    margin: 5px;
+                    padding: 1rem;
+                    border-radius: 0.5rem;
+                    
+                    
+                    &:hover{
+                        padding: 1rem;
+                        background-color: rgba(255,255,255,0.5);
+                            a{
+                                color: white;
+                                text-decoration: none;
+                                font-size: larger;
+                                svg{
+                                    font-size: 3.0rem;
+                                }
+                            }
+                    }
+                    a{
+                        color: beige;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        svg{
 
-                    fill: pink;
-                    margin-right: 10px;
-                    font-size: 1.5rem;
+                            fill: pink;
+                            margin-right: 10px;
+                            font-size: 1.5rem;
+                        }
+                    
+                    }
                 }
-                
             }
-        }
-        }
+            .active{
+                background-color: rgba(255,255,255,0.5);
+                a{
+                    font-size: large;
+                    svg{
+                        font-size: large;
+                    }
+                }
+            }
+            
         }
     }
 
@@ -127,26 +143,39 @@ const SideBar = () => {
 
                 <div className="links">
                     <ul >
-                        <li>
-                            <a href=""><AiOutlinePlusCircle />Dashboard</a> 
+                        <li className={currnetLink === 1 ? "active": "none"}
+                        onClick={() => setCurrentLink(1)}>
+                            <Link to="/"><AiOutlinePlusCircle />Dashboard</Link> 
                         </li>
-                         <li>
-                            <a href=""><AiOutlineAppstore />My Profile</a> 
+
+                         <li className={currnetLink === 2 ? "active": "none"}
+                        onClick={() => setCurrentLink(2)}>
+                            <Link to="/profile"><AiOutlineAppstore />My Profile</Link> 
                         </li>
-                         <li>
-                            <a href=""><AiTwotoneCopy />Add Tests</a> 
+
+                         <li className={currnetLink === 3 ? "active": "none"}
+                        onClick={() => setCurrentLink(3)}>
+                            <Link to="/add_tests"><AiTwotoneCopy />Add Tests</Link> 
                         </li>
-                         <li>
-                            <a href=""><AiOutlineUser />Lab Tests</a> 
+
+                        <li className={currnetLink === 4 ? "active": "none"}
+                        onClick={() => setCurrentLink(4)}>
+                            <Link to="/lab_tests"><AiOutlineUser />Lab Tests</Link> 
                         </li>
-                         <li>
-                            <a href=""><AiOutlinePlusCircle />My Bookings</a> 
+
+                         <li className={currnetLink === 5 ? "active": "none"}
+                        onClick={() => setCurrentLink(5)}>
+                            <Link to="/my_bookings"><AiOutlinePlusCircle />My Bookings</Link> 
                         </li>
-                         <li>
-                            <a href=""><AiFillAccountBook />Add Nurses</a> 
+
+                         <li className={currnetLink === 6 ? "active": "none"}
+                        onClick={() => setCurrentLink(6)}>
+                            <Link to="/add_nurses"><AiFillAccountBook />Add Nurses</Link> 
                         </li>
-                        <li>
-                            <a href=""><AiFillAlert /> Nurses</a> 
+
+                       <li className={currnetLink === 7 ? "active": "none"}
+                        onClick={() => setCurrentLink(7)}>
+                            <Link to="/nurses"><AiFillAlert /> Nurses</Link> 
                         </li>
                     </ul>
                 </div>
