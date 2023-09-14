@@ -1,4 +1,5 @@
 import { useEffect,useState } from "react";
+import styled  from 'styled-components';
 import axios from "axios"
 
 const SignUp = () => {
@@ -49,31 +50,51 @@ const SignUp = () => {
     }// end Submit
     return (  
     
-        <div className="submit">
-            <h1>Register Your Lab</h1>
-            {loading  && <div className="loading"> We are Proccessing your Request.. Please Wait..</div>}
-            {success && <div className="success"> {success}</div>}  
-            {failure && <div className="failure"> { failure}</div>}  
-            <form onSubmit={submit}>
-                <input type="text" placeholder="Enter Lab Name" value={lab_name}
-                    onChange={(e) => setName(e.target.value)} required/> <br /><br />
+        <div className="form">
+            <Section>
                 
-                <input type="text" placeholder="Enter Permit ID" value={permit_id}
-                    onChange={(e) => setPermit(e.target.value)} required/> <br /><br />
-                
-                <input type="email" placeholder="Enter Email" value={email}
-                    onChange={(e) => setEmail(e.target.value)} required/> <br /><br />
+                {loading  && <div className="loading"> We are Proccessing your Request.. Please Wait..</div>}
+                {success && <div className="success"> {success}</div>}  
+                {failure && <div className="failure"> { failure}</div>}  
+                <form onSubmit={submit} className="card shadow p-5 pt-4 mt-5">
+                    <h1>Register Your Lab</h1>
 
-                <input type="phone" placeholder="Enter Phone" value={phone}
-                    onChange={(e) => setPhone(e.target.value)} required/> <br /><br />
+                    <div className="card-body pt-3">
+                             <input type="text" placeholder="Enter Lab Name" value={lab_name}
+                        onChange={(e) => setName(e.target.value)} required className="form-control"/> <br /><br />
+                    
+                            <input type="text" placeholder="Enter Permit ID" value={permit_id}
+                                onChange={(e) => setPermit(e.target.value)} required className="form-control"/> <br /><br />
+                            
+                            <input type="email" placeholder="Enter Email" value={email}
+                                onChange={(e) => setEmail(e.target.value)} required className="form-control"/> <br /><br />
 
-                <input type="password" placeholder="Enter Password" value={password}
-                    onChange={(e) => setPassword(e.target.value)} required/> <br /><br />
+                            <input type="phone" placeholder="Enter Phone" value={phone}
+                                onChange={(e) => setPhone(e.target.value)} required className="form-control"/> <br /><br />
 
-                <button>Create Account</button>
+                            <input type="password" placeholder="Enter Password" value={password}
+                                onChange={(e) => setPassword(e.target.value)} required className="form-control"/> <br /><br />
+
+                    <button className="btn btn-outline-primary">Create Account</button>
+                    </div>
+                   
             </form>
+            </Section>
+            
         </div>
     );
 }
  
 export default SignUp;
+const Section = styled.section `
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 55px;
+    width: 75%;
+    right: 0;
+    justify-content: center;
+`
+   
+    

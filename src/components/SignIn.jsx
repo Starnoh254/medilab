@@ -1,4 +1,5 @@
 import { useEffect,useState } from "react";
+import styled  from 'styled-components';
 import axios from "axios"
 
 const SignIn = () => {
@@ -27,10 +28,17 @@ const SignIn = () => {
 
                 })
                 .then(function (response) {
-                    console.log(response.data)
-                    console.log(response.data.message);
+                    console.log( "X "  + response.data)
+                    console.log("Y " + response.data.message);
+                    console.log("Refresh_token " + response.data.refresh_token);
+                    console.log("Lab _id " + response.data.message.lab_id);
                     setLoading(false)
                     //setSuccess(response.data.message)
+
+                    localStorage.setItem("lab_id", response.data.message.lab_id)
+                    localStorage.setItem("refresh_token", response.data.refresh_token)
+                    console.log("saved " + localStorage.getItem("lab_id"))
+                    console.log("saved2 " + localStorage.getItem("refresh_token"))
                     setTimeout((function (){
                         setSuccess('')
                     }),10000)
@@ -47,24 +55,40 @@ const SignIn = () => {
     }// end Submit
     return (  
     
-        <div className="submit">
-            <h1>Register Your Lab</h1>
-            {loading  && <div className="loading"> We are Proccessing your Request.. Please Wait..</div>}
-            {success && <div className="success"> {success}</div>}  
-            {failure && <div className="failure"> { failure}</div>}  
-            <form onSubmit={submit}>
-                
-                <input type="email" placeholder="Enter Email" value={email}
-                    onChange={(e) => setEmail(e.target.value)} required/> <br /><br />
+        <div className="form">
+            <Section>
+
+                {loading  && <div className="loading"> We are Proccessing your Request.. Please Wait..</div>}
+                {success && <div className="success"> {success}</div>}  
+                {failure && <div className="failure"> { failure}</div>}  
+                <form onSubmit={submit} className="card shadow p-5 pt-4 mt-5">
+                    <h1>Register Your Lab</h1>
+                    <div className="card-body pt-3">
+                        <input type="email" placeholder="Enter Email" value={email}
+                            onChange={(e) => setEmail(e.target.value)} required className="form-control" /> <br /><br />
 
 
-                <input type="password" placeholder="Enter Password" value={password}
-                    onChange={(e) => setPassword(e.target.value)} required/> <br /><br />
+                        <input type="password" placeholder="Enter Password" value={password}
+                            onChange={(e) => setPassword(e.target.value)} required className="form-control"/> <br /><br />
 
-                <button>Login Account</button>
-            </form>
+                        <button className="btn btn-outline-primary">Login Account</button>
+                    </div>
+                   
+                </form>
+            </Section>
         </div>
     );
 }
  
 export default SignIn;
+
+const Section = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 55px;
+    width: 75%;
+    right: 0;
+    justify-content: center;
+`

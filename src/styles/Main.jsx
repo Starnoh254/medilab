@@ -4,8 +4,8 @@ const Main = styled.div`
     width: 75%;
     position: fixed;
     right: 0;
-    bottom: 0;
-    top: 68px;
-    background-color: blueviolet;
+    justify-content: center;
+    top: 55px;
+    
 `
 export default Main;
