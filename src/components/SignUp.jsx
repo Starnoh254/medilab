@@ -87,14 +87,12 @@ const SignUp = () => {
  
 export default SignUp;
 const Section = styled.section `
-     display: flex;
+        display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
-    top: 55px;
-    width: 75%;
-    right: 0;
-    justify-content: center;
+    position: relative;
+    top: 100px;
+    justify-content: center;;
 `
    
     

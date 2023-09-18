@@ -23,18 +23,20 @@ function App() {
     <Router>
          <div className="App">
     
-          <SideBar/>
-          <TopBar/>
+    {/* Removed the sidebar and top bar */}
+          {/* <SideBar/>
+
+          <TopBar/> */}
           {/* Routing will be required here */}
            <Routes>
-            <Route path='/' element = {<MainContent/>}></Route>
+            <Route path='/' element = {<SignIn/>}></Route>
             <Route path='/profile' element = {<Profile/>}></Route>
             <Route path='/add_tests' element = {<AddTests/>}></Route>
             <Route path='/lab_tests' element = {<LabTests/>}></Route>
             <Route path='/my_bookings' element = {<MyBookings/>}></Route>
             <Route path='/add_nurses' element = {<AddNurses/>}></Route>
             <Route path='/nurses' element = {<Nurses/>}></Route>
-            <Route path='/sign_in' element = {<SignIn />}></Route>
+            <Route path='/dashboard' element = {<MainContent />}></Route>
             <Route path='/sign_up' element = {<SignUp />}></Route>
            </Routes>
 

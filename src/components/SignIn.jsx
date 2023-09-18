@@ -1,11 +1,12 @@
 import { useEffect,useState } from "react";
 import styled  from 'styled-components';
 import axios from "axios"
+import { Link, Navigate , useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
     // hooks 
   
-
+    const navigation = useNavigate() // hook
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -33,7 +34,19 @@ const SignIn = () => {
                     console.log("Refresh_token " + response.data.refresh_token);
                     console.log("Lab _id " + response.data.message.lab_id);
                     setLoading(false)
-                    //setSuccess(response.data.message)
+                    setSuccess(response.data.message)
+                    if(!response.data.refresh_token){
+                            // Redirect to signin or ignore
+                            console.log("There is no token")
+                            
+                    }else if (response.data.refresh_token){
+                            // Navigate 
+                            console.log("There is a token")
+                            navigation("/")
+                    }else {
+                            console.log ("Something went wrong")
+                    }
+
 
                     localStorage.setItem("lab_id", response.data.message.lab_id)
                     localStorage.setItem("refresh_token", response.data.refresh_token)
@@ -41,7 +54,7 @@ const SignIn = () => {
                     console.log("saved2 " + localStorage.getItem("refresh_token"))
                     setTimeout((function (){
                         setSuccess('')
-                    }),10000)
+                    }),5000)
 
                     setEmail('');setPassword('');
                 })
@@ -58,11 +71,11 @@ const SignIn = () => {
         <div className="form">
             <Section>
 
-                {loading  && <div className="loading"> We are Proccessing your Request.. Please Wait..</div>}
-                {success && <div className="success"> {success}</div>}  
-                {failure && <div className="failure"> { failure}</div>}  
+                {loading  && <div className="text-primary"> We are Proccessing your Request.. Please Wait..</div>}
+                {success && <div className="text-success"> {success}</div>}  
+                {failure && <div className="text-danger"> { failure}</div>}  
                 <form onSubmit={submit} className="card shadow p-5 pt-4 mt-5">
-                    <h1>Register Your Lab</h1>
+                    <h1>Sign In to your Lab</h1>
                     <div className="card-body pt-3">
                         <input type="email" placeholder="Enter Email" value={email}
                             onChange={(e) => setEmail(e.target.value)} required className="form-control" /> <br /><br />
@@ -73,8 +86,9 @@ const SignIn = () => {
 
                         <button className="btn btn-outline-primary">Login Account</button>
                     </div>
-                   
+                    <Link to = "/sign_up" >Don't  have an account , create </Link>
                 </form>
+               
             </Section>
         </div>
     );
@@ -86,9 +100,7 @@ const Section = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
-    top: 55px;
-    width: 75%;
-    right: 0;
+    position: relative;
+    top: 100px;
     justify-content: center;
 `
