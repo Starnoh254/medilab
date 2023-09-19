@@ -2,6 +2,7 @@ import { useEffect,useState } from "react";
 import styled  from 'styled-components';
 import axios from "axios"
 import { Link, Navigate , useNavigate } from 'react-router-dom'
+import AxiosInstance from "../helpers/AxiosInstance";
 
 const SignIn = () => {
     // hooks 
@@ -22,7 +23,7 @@ const SignIn = () => {
             console.log("submitting")
 
         
-                axios.post("https://modcom.pythonanywhere.com/api/lab_signin", {
+                AxiosInstance.post("/lab_signin", {
 
                     email: email,
                     password: password
@@ -42,7 +43,7 @@ const SignIn = () => {
                     }else if (response.data.refresh_token){
                             // Navigate 
                             console.log("There is a token")
-                            navigation("/")
+                            navigation("/dashboard")
                     }else {
                             console.log ("Something went wrong")
                     }

@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Main from '../styles/Main'
 import axios from 'axios'
 import Layout from "../helpers/Layout";
+import AxiosInstance from "../helpers/AxiosInstance";
 
 const AddTests = () => {
     // user must be logged in to be here
@@ -28,7 +29,7 @@ const AddTests = () => {
             console.log("submitting")
 
                 setLoading("We are Proccessing your Request.. Please Wait..")
-                axios.post("https://modcom.pythonanywhere.com/api/add_tests", {
+                AxiosInstance.post("/add_tests", {
 
                     lab_id: lab_id,
                     test_name: test_name,
@@ -38,11 +39,7 @@ const AddTests = () => {
                     availability: availability,
                     more_info: more_info
 
-                },{
-                    headers: {
-                        Authorization : `Bearer ${refresh_token}`
-                    }
-                })
+                } )
                 .then(function (response) {
                     setLoading(null)
                     console.log( response.data)
