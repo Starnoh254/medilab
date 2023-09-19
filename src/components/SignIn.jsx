@@ -43,13 +43,14 @@ const SignIn = () => {
                     }else if (response.data.refresh_token){
                             // Navigate 
                             console.log("There is a token")
-                            navigation("/dashboard")
+                            navigation("/")
                     }else {
                             console.log ("Something went wrong")
                     }
 
 
                     localStorage.setItem("lab_id", response.data.message.lab_id)
+                    localStorage.setItem("lab_name",response.data.message.lab_name)
                     localStorage.setItem("refresh_token", response.data.refresh_token)
                     console.log("saved " + localStorage.getItem("lab_id"))
                     console.log("saved2 " + localStorage.getItem("refresh_token"))

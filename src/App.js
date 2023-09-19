@@ -29,14 +29,14 @@ function App() {
           <TopBar/> */}
           {/* Routing will be required here */}
            <Routes>
-            <Route path='/' element = {<SignIn/>}></Route>
+            <Route path='/sign_in' element = {<SignIn/>}></Route>
             <Route path='/profile' element = {<Profile/>}></Route>
             <Route path='/add_tests' element = {<AddTests/>}></Route>
             <Route path='/lab_tests' element = {<LabTests/>}></Route>
             <Route path='/my_bookings' element = {<MyBookings/>}></Route>
             <Route path='/add_nurses' element = {<AddNurses/>}></Route>
             <Route path='/nurses' element = {<Nurses/>}></Route>
-            <Route path='/dashboard' element = {<MainContent />}></Route>
+            <Route path='/' element = {<MainContent />}></Route>
             <Route path='/sign_up' element = {<SignUp />}></Route>
            </Routes>
 

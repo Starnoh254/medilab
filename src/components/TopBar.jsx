@@ -6,10 +6,11 @@ import { AiOutlineCalendar } from 'react-icons/ai';
 import Avatar from "../images/profile-picture.webp"
 
 const TopBar = () => {
+    const lab_name = localStorage.getItem("lab_name")
     return ( 
         <Nav>
-            <div className="title">
-                <h1>Dashboard</h1>
+            <div className='title'>
+                <span className="fs-6 ml-1"> You are logged in as {lab_name}</span>
             </div>
 
             <div className="search">
@@ -46,6 +47,7 @@ const Nav = styled.nav`
     position: fixed;
     width: 75%;
     right: 0;
+    height: 10%;
     z-index: 1000;
     align-items: center;
     background-color: aliceblue;
@@ -55,6 +57,7 @@ const Nav = styled.nav`
     .title{
         color: orange;
         margin-left: 5px;
+        font-size: 5px;
         flex: 1;
     }
     .search{

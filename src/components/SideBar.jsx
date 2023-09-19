@@ -3,7 +3,9 @@ import styled  from 'styled-components';
 import {AiFillAppstore,  AiFillAccountBook, AiFillAlert, AiOutlineAppstore, AiOutlineLogout, AiOutlineWhatsApp } from 'react-icons/ai'
 import {AiOutlineBank,AiOutlinePlusCircle,AiOutlineUser,AiTwotoneCopy} from 'react-icons/ai'
 import {Link} from "react-router-dom"
+import LogOut  from '../helpers/LogOut';
 // sudo npm install react-router-dom@latest  - Installation
+
 
 
 // Hooks 
@@ -88,7 +90,7 @@ const Section = styled.section`
                 a{
                     font-size: large;
                     svg{
-                        font-size: large;
+                        font-size: 1.5rem;
                     }
                 }
             }
@@ -132,7 +134,13 @@ const Section = styled.section`
 `
 
 const SideBar = () => {
-    const[currnetLink , setCurrentLink] = useState(1)
+    const { logout } = LogOut()
+    const[currnetLink , setCurrentLink] = useState(null)
+
+    const handleClick = (link) => {
+        setCurrentLink(link)
+    }
+    console.log(currnetLink)
     return (  
         <Section>
             <div className="top">
@@ -143,39 +151,32 @@ const SideBar = () => {
 
                 <div className="links">
                     <ul >
-                        <li className={currnetLink === 1 ? "active": "none"}
-                        onClick={() => setCurrentLink(1)}>
-                            <Link to="/"><AiOutlinePlusCircle />Dashboard</Link> 
+                        <li className={currnetLink === 1 ? "active": ""}>
+                            <Link  onClick={() => handleClick(1)} to="/"><AiOutlinePlusCircle />Dashboard</Link> 
                         </li>
 
-                         <li className={currnetLink === 2 ? "active": "none"}
-                        onClick={() => setCurrentLink(2)}>
-                            <Link to="/profile"><AiOutlineAppstore />My Profile</Link> 
+                         <li className={currnetLink === 2 ? "active": ""} >
+                            <Link onClick={() => handleClick(2)} to="/profile"><AiOutlineAppstore />My Profile</Link> 
                         </li>
 
-                         <li className={currnetLink === 3 ? "active": "none"}
-                        onClick={() => setCurrentLink(3)}>
-                            <Link to="/add_tests"><AiTwotoneCopy />Add Tests</Link> 
+                         <li className={currnetLink === 3 ? "active": ""} >
+                            <Link onClick={() => handleClick(3)} to="/add_tests"><AiTwotoneCopy />Add Tests</Link> 
                         </li>
 
-                        <li className={currnetLink === 4 ? "active": "none"}
-                        onClick={() => setCurrentLink(4)}>
-                            <Link to="/lab_tests"><AiOutlineUser />Lab Tests</Link> 
+                        <li className={currnetLink === 4 ? "active": ""} >
+                            <Link onClick={() => handleClick(4)} to="/lab_tests"><AiOutlineUser />Lab Tests</Link> 
                         </li>
 
-                         <li className={currnetLink === 5 ? "active": "none"}
-                        onClick={() => setCurrentLink(5)}>
-                            <Link to="/my_bookings"><AiOutlinePlusCircle />My Bookings</Link> 
+                         <li className={currnetLink === 5 ? "active": ""}>
+                            <Link onClick={() => handleClick(5)} to="/my_bookings"><AiOutlinePlusCircle />My Bookings</Link> 
                         </li>
 
-                         <li className={currnetLink === 6 ? "active": "none"}
-                        onClick={() => setCurrentLink(6)}>
-                            <Link to="/add_nurses"><AiFillAccountBook />Add Nurses</Link> 
+                         <li className={currnetLink === 6 ? "active": ""} >
+                            <Link  onClick={() => handleClick(6)} to="/add_nurses"><AiFillAccountBook />Add Nurses</Link> 
                         </li>
 
-                       <li className={currnetLink === 7 ? "active": "none"}
-                        onClick={() => setCurrentLink(7)}>
-                            <Link to="/nurses"><AiFillAlert /> Nurses</Link> 
+                       <li className={currnetLink === 7 ? "active": ""}>
+                            <Link onClick={() => handleClick(7)} to="/nurses"><AiFillAlert /> Nurses</Link> 
                         </li>
                     </ul>
                 </div>
@@ -190,8 +191,8 @@ const SideBar = () => {
                 <span><strong>Upgrade Now</strong></span> <br/>
             </div>
 
-            <div className="logout">
-                <a href="">
+            <div className="p-4">
+                <a href="" onClick={logout} className='btn btn-primary '>
                     <AiOutlineLogout/> Log Out
                 </a>
             </div>

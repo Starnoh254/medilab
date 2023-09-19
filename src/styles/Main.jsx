@@ -5,7 +5,9 @@ const Main = styled.div`
     position: fixed;
     right: 0;
     justify-content: center;
-    top: 55px;
+    height: 90%;
+    bottom: 0;
+    padding-bottom: 20px;
     
 `
 export default Main;
