@@ -14,7 +14,7 @@ const Section = styled.section`
     background-color: blue;
     display: flex;
     position: fixed;
-    overflow-y: auto;
+    overflow: auto;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
@@ -135,12 +135,12 @@ const Section = styled.section`
 
 const SideBar = () => {
     const { logout } = LogOut()
-    const[currnetLink , setCurrentLink] = useState(null)
+    const[currentLink , setCurrentLink] = useState(null)
 
     const handleClick = (link) => {
         setCurrentLink(link)
     }
-    console.log(currnetLink)
+    console.log(currentLink)
     return (  
         <Section>
             <div className="top">
@@ -151,31 +151,31 @@ const SideBar = () => {
 
                 <div className="links">
                     <ul >
-                        <li className={currnetLink === 1 ? "active": ""}>
+                        <li className={currentLink === 1 ? "active": ""}>
                             <Link  onClick={() => handleClick(1)} to="/"><AiOutlinePlusCircle />Dashboard</Link> 
                         </li>
 
-                         <li className={currnetLink === 2 ? "active": ""} >
+                         <li className={currentLink === 2 ? "active": ""} >
                             <Link onClick={() => handleClick(2)} to="/profile"><AiOutlineAppstore />My Profile</Link> 
                         </li>
 
-                         <li className={currnetLink === 3 ? "active": ""} >
+                         <li className={currentLink === 3 ? "active": ""} >
                             <Link onClick={() => handleClick(3)} to="/add_tests"><AiTwotoneCopy />Add Tests</Link> 
                         </li>
 
-                        <li className={currnetLink === 4 ? "active": ""} >
+                        <li className={currentLink === 4 ? "active": ""} >
                             <Link onClick={() => handleClick(4)} to="/lab_tests"><AiOutlineUser />Lab Tests</Link> 
                         </li>
 
-                         <li className={currnetLink === 5 ? "active": ""}>
+                         <li className={currentLink === 5 ? "active": ""}>
                             <Link onClick={() => handleClick(5)} to="/my_bookings"><AiOutlinePlusCircle />My Bookings</Link> 
                         </li>
 
-                         <li className={currnetLink === 6 ? "active": ""} >
+                         <li className={currentLink === 6 ? "active": ""} >
                             <Link  onClick={() => handleClick(6)} to="/add_nurses"><AiFillAccountBook />Add Nurses</Link> 
                         </li>
 
-                       <li className={currnetLink === 7 ? "active": ""}>
+                       <li className={currentLink === 7 ? "active": ""}>
                             <Link onClick={() => handleClick(7)} to="/nurses"><AiFillAlert /> Nurses</Link> 
                         </li>
                     </ul>

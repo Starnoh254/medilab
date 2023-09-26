@@ -65,7 +65,7 @@ const AddTests = () => {
         <div className="container">
             <Layout/>
             <Main>
-                 <form onSubmit={submit} className="card shadow p-5 pt-4 mt-5" >
+                 <form onSubmit={submit} className="card shadow p-5 pt-4 m-5" >
                 <div className="card-body">
                      <h1>Add Lab Test</h1>
                             {loading  && <div className="text-primary">{loading} </div>}

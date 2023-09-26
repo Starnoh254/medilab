@@ -1,9 +1,11 @@
 import { useEffect,useState } from "react";
 import styled  from 'styled-components';
+import {  Navigate , useNavigate } from 'react-router-dom'
 import axios from "axios"
 
 const SignUp = () => {
     // hooks 
+    const navigate = useNavigate()
     const [lab_name, setName] = useState(null)
     const [permit_id, setPermit] = useState(null)
     const [email, setEmail] = useState(null)
@@ -39,6 +41,7 @@ const SignUp = () => {
                     }),10000)
 
                     setEmail(''); setName('');setPassword('');setPermit('');setPhone('')
+                    navigate("/sign_in")
                 })
                 .catch(function (error) {
                     console.log(error);
