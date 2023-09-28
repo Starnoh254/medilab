@@ -1,15 +1,20 @@
-import axios from "axios";
+// axiosInstance.js
 
-const refresh_token = localStorage.getItem("refresh_token")
-
-const AxiosInstance = axios.create({
-    baseURL: "https://modcom.pythonanywhere.com/api",
-    timeout: 30000,
+import axios from 'axios';
+//let person = Person()
+//We now have axiosInstance as a component
+const AxiosInstance = () => {
+  const refresh_token = localStorage.getItem("refresh_token")
+  console.log("Loads6")
+  console.log("Token in instance v" + refresh_token)
+  const instance = axios.create({
+    baseURL: 'https://modcom.pythonanywhere.com/api', // Replace with your API's base URL
+    timeout: 30000, // Adjust the timeout as needed (in milliseconds)
     headers: {
-        'Content-Type': "application/json" ,
-        'Authorization': `Bearer ${refresh_token}`
+      'Content-Type': 'application/json', // Set the default content type for requests
+      'Authorization': `Bearer ${refresh_token}`
     },
-
-});
-
-export default AxiosInstance;
+  });
+  return {instance};//return instance from line 10
+}
+export default AxiosInstance;//export component

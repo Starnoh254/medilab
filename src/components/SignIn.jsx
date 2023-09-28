@@ -2,7 +2,8 @@ import { useEffect,useState } from "react";
 import styled  from 'styled-components';
 import axios from "axios"
 import { Link, Navigate , useNavigate } from 'react-router-dom'
-import AxiosInstance from "../helpers/AxiosInstance";
+
+import axiosInstance2 from "../helpers/axiosInstance2";
 
 const SignIn = () => {
     // hooks 
@@ -23,7 +24,7 @@ const SignIn = () => {
             console.log("submitting")
 
         
-                AxiosInstance.post("/lab_signin", {
+                axiosInstance2.post("/lab_signin", {
 
                     email: email,
                     password: password
