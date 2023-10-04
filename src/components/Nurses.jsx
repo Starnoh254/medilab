@@ -13,10 +13,16 @@ const Nurses = () => {
     const [error, setError] = useState(null)
     const [filteredData, setFilteredData] = useState([]); 
     const [query,setQuery] = useState('')  // Used to query 
+    // const result = AxiosInstance()
+    // console.log(result);
+
+    const { instance } = AxiosInstance()
+
+
 
 
     useEffect(() => {
-        AxiosInstance.post("/view_nurses", {
+        instance.post("/view_nurses", {
             lab_id: lab_id
         })
             .then(function (response) {

@@ -11,9 +11,10 @@ const Profile = () => {
     const [user_details , setDetails] = useState({})
     const [loading , setLoading ] = useState(null)
     const [error , setError]  = useState(null)
+    const {instance } = AxiosInstance()
 
     useEffect(() => {
-        AxiosInstance.post("/lab_profile",{
+        instance.post("/lab_profile",{
             lab_id: lab_id
         })
         .then(function (response) {

@@ -23,6 +23,7 @@ const AddNurses = () => {
     const [success , setSuccess] = useState(null)
     const [loading , setLoading] = useState(false)
     const [selected , setSelected ] = useState('')
+    const {instance} = AxiosInstance()
 
     const handleSelect = (e) => {
         setSelected(e.target.value)
@@ -38,7 +39,7 @@ const AddNurses = () => {
             console.log("submitting")
 
                 setLoading("We are Proccessing your Request.. Please Wait..")
-                AxiosInstance.post("/add_nurse", {
+                instance.post("/add_nurse", {
 
                     lab_id: lab_id,
                     surname: surname,

@@ -13,10 +13,11 @@ const LabTests = () => {
     const [error, setError] = useState(null)
     const [filteredData, setFilteredData] = useState([]); 
     const [query,setQuery] = useState('')  // Used to query 
+    const {instance } = AxiosInstance()
 
 
     useEffect(() => {
-        AxiosInstance.post("/view_lab_tests", {
+        instance.post("/view_lab_tests", {
             lab_id: lab_id
         })
             .then(function (response) {

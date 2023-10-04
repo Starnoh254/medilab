@@ -9,7 +9,7 @@ const AxiosInstance = () => {
   console.log("Token in instance v" + refresh_token)
   const instance = axios.create({
     baseURL: 'https://modcom.pythonanywhere.com/api', // Replace with your API's base URL
-    timeout: 30000, // Adjust the timeout as needed (in milliseconds)
+    timeout: 40000, // Adjust the timeout as needed (in milliseconds)
     headers: {
       'Content-Type': 'application/json', // Set the default content type for requests
       'Authorization': `Bearer ${refresh_token}`

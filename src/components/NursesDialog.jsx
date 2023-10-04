@@ -9,19 +9,37 @@ import Modal from 'react-modal'
 const NursesDialog = ({isOpen , onClose , invoice_no}) => {
     //check session 
     const { lab_name , lab_id , refresh_token } = CheckSession()
+    const [nurses , setNurses] = useState([]) // empty
+    
+    const [selectedID , setSelectedID] = useState(0)
 
     // below hook will show picked nurse as first option
     const [selected , setSelected] = useState('')
+    const { instance } = AxiosInstance()
+
 
     const handleSelection = (e) => {
         setSelected(e.target.value)
         console.log(e)
         console.log(e.target)
         console.log(e.target.value)
+        setSelectedID(e.target.value);
     }
 
-    const [nurses , setNurses] = useState([]) // empty
-    const { instance } = AxiosInstance()
+    const Allocate = (selectedId , invoice_no) => {
+        instance.post("/task_allocation",{
+            nurse_id:selectedId,
+            invoice_no:invoice_no
+        }).then(function (response) {
+            console.log("Response", response);
+            alert("Allocated " + response.data.message)
+        }).catch(function (error){
+            alert("Error is " + error)
+        })
+
+    }
+
+
 
     useEffect(() => {
         instance.post("/view_nurses",{
@@ -29,6 +47,7 @@ const NursesDialog = ({isOpen , onClose , invoice_no}) => {
         }).then(function (response) {
             console.log("Response", response);
             setNurses(response.data) // Update nurses hook
+            console.log(response.data)
         }).catch(function (error){
             alert("Error is " + error)
         })
@@ -42,6 +61,13 @@ const NursesDialog = ({isOpen , onClose , invoice_no}) => {
         }
     }
 
+    function handleAllocate() {
+        const confirmed = window.confirm('Are you sure you want to assign the nurse?');
+        if (confirmed) {
+            Allocate(selectedID, invoice_no);
+        }
+    }
+
     return(
         <Modal 
         isOpen={isOpen} 
@@ -52,20 +78,31 @@ const NursesDialog = ({isOpen , onClose , invoice_no}) => {
             <div className="text-center">
                 Inv No: {invoice_no} <br></br>
                 <label htmlFor="">Select a Nurse</label> <br/>
-                <select className="form-control" value = {selected} onChange={(e)=>handleSelection(e)}>
-                    <option value=""> -- Select --</option>
-                    {/* Map through the array of nurses */}
-                    {nurses && nurses.map((nurse) => {
-                        return <option key = {nurse.nurse_id} >{nurse.surname} {nurse.others}</option>
-                    })}
-
-                </select> <br></br>
-                <button className="btn btn-primary">Assign Nurse</button>
+                <select className="form-control" value={selected} onChange={(e) => handleSelection(e)}>
+                <option > -- Select --</option>
+                    {nurses && nurses.map((nurse) => (
+                        <option key={nurse.nurse_id} value={nurse.nurse_id}>
+                            {nurse.surname} {nurse.others}
+                        </option>
+                    ))}
+                 </select>
+ <br></br>
+                Selected : {selectedID} and {invoice_no}<br></br>
+                {selectedID && (
+                    <button className="btn btn-dark btn-sm"
+                        onClick={handleAllocate}>
+                    Assign Nurse
+                </button>
+                )} <br /> <br />               
+                 <button className="btn btn-dark btn-sm" onClick={onClose}>Close</button>
             </div>
 
         </Modal>
 
     );
+
+     
 }
+
  
 export default NursesDialog;
