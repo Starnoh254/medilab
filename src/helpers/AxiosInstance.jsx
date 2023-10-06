@@ -5,8 +5,8 @@ import axios from 'axios';
 //We now have axiosInstance as a component
 const AxiosInstance = () => {
   const refresh_token = localStorage.getItem("refresh_token")
-  console.log("Loads6")
-  console.log("Token in instance v" + refresh_token)
+  // console.log("Loads6")
+  // console.log("Token in instance v" + refresh_token)
   const instance = axios.create({
     baseURL: 'https://modcom.pythonanywhere.com/api', // Replace with your API's base URL
     timeout: 40000, // Adjust the timeout as needed (in milliseconds)

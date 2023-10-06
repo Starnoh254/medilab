@@ -4,6 +4,7 @@ import AxiosInstance from "../helpers/AxiosInstance"
 import CheckSession from "../helpers/CheckSession"
 import Layout from "../helpers/Layout"
 import Main from "../styles/Main"
+import TestUpdate from "./TestUpdate"
 const LabTests = () => {
      //Protect
     const { lab_name, lab_id, refresh_token } = CheckSession()
@@ -14,6 +15,16 @@ const LabTests = () => {
     const [filteredData, setFilteredData] = useState([]); 
     const [query,setQuery] = useState('')  // Used to query 
     const {instance } = AxiosInstance()
+
+    const [show , setShowDialog] = useState(false);
+
+    const [test_id , setId] = useState('')
+    const [test_name , setName] = useState('')
+    const [test_description , setDescription] = useState('')
+    const [test_cost , setCost] = useState('')
+    const [test_discount , setDiscount] = useState('')
+    const [availability , setAvailability] = useState('')
+    const [more_info , setInfo] = useState('')
 
 
     useEffect(() => {
@@ -79,11 +90,32 @@ const LabTests = () => {
                             <td>{test.test_discount}</td>
                             <td>{test.availability}</td>
                             <td>{test.more_info}</td>
-                            <td><button className="btn btn-danger btn-sm"> Remove</button></td>
-                            <td><button className="btn btn-warning btn-sm"> Update</button></td>
+                            <td><button onClick = {() => handleDelete(test.test_id)}className="btn btn-danger btn-sm"> Remove</button></td>
+                            <td><button onClick = {() => {
+                                setId(test.test_id)
+                                setDescription(test.test_description)
+                                setName(test.test_name)
+                                setCost(test.test_cost)
+                                setDiscount(test.test_discount)
+                                setInfo(test.more_info)
+                                setAvailability(test.availability)
+                                setShowDialog(true)
+                            }}className="btn btn-warning btn-sm"> Update</button></td>
                         
                         </tr>    
                 ))}
+
+                <TestUpdate isOpen={show}
+                    onClose={() => setShowDialog(false)}
+                    test_id = {test_id}
+                    test_description= {test_description}
+                    test_name= {test_name}
+                    test_cost= {test_cost} 
+                    test_discount= {test_discount} 
+                    availability = {availability}
+                    more_info= {more_info}/>
+
+                
                    </tbody>
                   
                 </table>
@@ -94,6 +126,27 @@ const LabTests = () => {
         </div>
         
     );
+
+    function handleDelete(test_id) {
+        
+        const confirmed = window.confirm('Are you sure you want to delete the test?');
+        if (confirmed) {
+            console.log(test_id)
+            Delete(test_id);
+        }
+    }
+
+    function Delete (test_id) { 
+        instance.delete(`/delete_test?test_id = ${test_id}`)
+        .then(function (response) {
+                         alert(response.data.message);
+                        
+                    })
+                    .catch(function (error) {
+                        alert(error.message)    
+        })//end catch
+ }
 }
+
  
 export default LabTests;

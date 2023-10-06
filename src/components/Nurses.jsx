@@ -85,7 +85,7 @@ const Nurses = () => {
                             <td>{nurse.email}</td>
                             <td>{nurse.phone}</td>
                             <td>{nurse.gender}</td>
-                            <td><button className="btn btn-danger btn-sm"> Remove</button></td>
+                            <td><button  onClick = {() => handleDelete(nurse.nurse_id)} className="btn btn-danger btn-sm"> Remove</button></td>
                             <td><button className="btn btn-warning btn-sm"> Update</button></td>
                         
                         </tr>    
@@ -100,6 +100,26 @@ const Nurses = () => {
         </div>
         
     );
+
+        function handleDelete(nurse_id) {
+        
+        const confirmed = window.confirm('Are you sure you want to delete the test?');
+        if (confirmed) {
+            console.log(nurse_id)
+            Delete(nurse_id);
+        }
+    }
+
+    function Delete (nurse_id) { 
+        instance.delete(`/delete_nurse?nurse_id=${nurse_id}`)
+        .then(function (response) {
+                        alert(response.data.message);
+                        
+                    })
+                    .catch(function (error) {
+                        alert(error.message)  
+        })//end catch
+ }
 }
  
 export default Nurses;
